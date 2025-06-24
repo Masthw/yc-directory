@@ -8,8 +8,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*",
       },
-    ]
-  }
+    ],
+  },
+  devIndicators: {
+    position: "bottom-left",
+  },
 };
 
 export default nextConfig;

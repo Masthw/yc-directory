@@ -2,13 +2,21 @@ import React from "react";
 import Ping from "@/components/Ping";
 import { client } from "@/sanity/lib/client";
 import { STARTUP_VIEW_QUERY } from "@/sanity/lib/queries";
+import { writeClient } from "@/sanity/lib/write-client";
+import { after } from "next/server";
 
 const View = async ({ id }: { id: string }) => {
   const { views: totalViews } = await client
     .withConfig({ useCdn: false })
     .fetch(STARTUP_VIEW_QUERY, { id });
 
-  // Todo: Update the number of views
+  after(
+    async () =>
+      await writeClient
+        .patch(id)
+        .set({ views: totalViews + 1 })
+        .commit()
+  );
 
   return (
     <div className="view-container">

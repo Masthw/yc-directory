@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useActionState, useState } from "react";
 import { Input } from "./ui/input";
